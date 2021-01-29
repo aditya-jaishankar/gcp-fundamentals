@@ -1,10 +1,19 @@
 This file contains information on how to setup and customize a gcp vm to my liking and personal preferences
 
-Steps to start and run a python script in a VM
+### Using VSCode to interact with the VM
 
-1) Start up a new VM instance. Make sure both http allow requests are checked. Make sure to set up enough disk space in the boot disk - somewhat irritating to assign more disk space later. ALSO MAKE SURE TO INSTALL UBUNTU 18.04 LTS IMAGE IF YOU NEED TO USE GPUS AT SOME POINT. 
-2) After setting up, click on the instance name, click on the edit pencil icon and copy and paste the contents of the cloud (or other) public key into the ssh box. Might have to generate an ssh key if none exists. Save. See the instructions here: https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys#createsshkeys
-3) Reserve a static IP for the instance - helps a lot later when connecting with vscode. Instructions here: https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address
+1. Install the `remote - SSH` extension on VSCode
+
+2. Start up a new VM instance on the cloud console.
+    * Check both `allow http traffic` and `allow https traffic`.
+    * Make sure to set up enough disk space in the boot disk - somewhat irritating to assign more disk space later. 500 GB should be enough for most uses.
+    * Make sure to use the UBUNTU 18.04 LTS image. This makes it much easier to install GPU drivers and use `tensorflow` later on if needed.  
+
+3. Attach your SSH keys to the instance so that VSCode can be used to SSH into this instance:
+    * Generate a new SSH key if needed. See instructions [here](https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys#createsshkeys)
+    * Edit the instance and then copy and paste the contents of the `{key_name}.pub` file into the box. Save. 
+
+4. Reserve a static IP for the instance. This helps a lot later when trying to connect with VSCode. Instructions [here](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
 
 3) Go to VSCode (make sure you have the remote ssh extension) and then add new host
 4) Type `ssh -I ~/.ssh/[key_name] [username_given_while_generating_key]@[external_ip_of_vm]
